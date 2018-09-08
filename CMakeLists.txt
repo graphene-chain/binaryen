@@ -57,7 +57,7 @@ ENDFOREACH()
 SET(all_passes passes)
 
 IF(MSVC)
-  IF(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "19.0") # VS2013 and older explicitly need /arch:sse2 set, VS2015 no longer has that option, but always enabled. 
+  IF(CMAKE_CXX_COMPILER_VERSION VERSION_LESS "19.0") # VS2013 and older explicitly need /arch:sse2 set, VS2015 no longer has that option, but always enabled.
     ADD_COMPILE_FLAG("/arch:sse2")
   ENDIF()
   ADD_COMPILE_FLAG("/wd4146") # Ignore warning "warning C4146: unary minus operator applied to unsigned type, result still unsigned", this pattern is used somewhat commonly in the code.
@@ -193,7 +193,7 @@ SET(binaryen_SOURCES
   src/support/colors.cpp
 )
 IF(BUILD_STATIC_LIB)
-  ADD_LIBRARY(binaryen STATIC ${binaryen_SOURCES})    
+  ADD_LIBRARY(binaryen STATIC ${binaryen_SOURCES})
 ELSE()
   ADD_LIBRARY(binaryen SHARED ${binaryen_SOURCES})
 ENDIF()
@@ -203,12 +203,12 @@ SET(s2wasm_SOURCES
   src/wasm-emscripten.cpp
   src/wasm-linker.cpp
 )
-ADD_EXECUTABLE(eosio-s2wasm
+ADD_EXECUTABLE(dbx-s2wasm
                ${s2wasm_SOURCES})
-TARGET_LINK_LIBRARIES(eosio-s2wasm passes wasm asmjs ast cfg support)
-SET_PROPERTY(TARGET eosio-s2wasm PROPERTY CXX_STANDARD 11)
-SET_PROPERTY(TARGET eosio-s2wasm PROPERTY CXX_STANDARD_REQUIRED ON)
-INSTALL(TARGETS eosio-s2wasm DESTINATION ${CMAKE_INSTALL_BINDIR})
+TARGET_LINK_LIBRARIES(dbx-s2wasm passes wasm asmjs ast cfg support)
+SET_PROPERTY(TARGET dbx-s2wasm PROPERTY CXX_STANDARD 11)
+SET_PROPERTY(TARGET dbx-s2wasm PROPERTY CXX_STANDARD_REQUIRED ON)
+INSTALL(TARGETS dbx-s2wasm DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(TARGETS binaryen
    LIBRARY DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}
    ARCHIVE DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR})
